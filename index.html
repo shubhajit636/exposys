@@ -4,9 +4,11 @@
   <script src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
   <style>
-    body {
-      background: #747474;
+   @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;1,200&display=swap');
+   body{
+      background: #ffffff;
       display: flex;
       height: 100vh;
       margin: 0;
@@ -21,22 +23,70 @@
       box-sizing: border-box;
       border-radius: 2px;
       padding: 0;
-      background: white;
+      background: rgb(46, 45, 45);
     }
     .copy {
       position: fixed;
       top: 10px;
       left: 50%;
+      padding: 7px;
       transform: translateX(-50%);
-      font-size: 16px;
-      color: white;
+      font-size: 26px;
+      font-family: 'Poppins', sans-serif;
+      color: rgb(10, 10, 10);
     }
+    .main{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .copyurl{
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;;
+      align-items: center;
+    }
+    .copyurl button{
+      background-color: rgb(46, 187, 252);
+      cursor: pointer;
+      padding: 8px;
+      border: none;
+    }
+    .copyurl button:hover{
+      background-color:rgb(13, 152, 216) ;
+    }
+    
   </style>
 </head>
 <body>
-  <div class="copy">Send your URL to a friend to start a video call</div>
-  <video id="localVideo" autoplay muted></video>
-  <video id="remoteVideo" autoplay></video>
-  <script src="script.js"></script>
+  
+  <div class="copy">CAm2cam</div>
+
+  <div class="main">
+  <div class="video">
+    <video id="localVideo" autoplay muted></video>
+    <video id="remoteVideo" autoplay></video>
+  </div>
+  <div class="copyurl">
+    <button style="padding: 10px; border-radius: 7px; color: white;" class="clipboard">Click me to copy current Url</button>
+    <p style="color: black;">Share url to start video call!</p>
+  </div>
+</div>
+    <script src="script.js"></script>
+  <script>
+
+    var $temp = $("<input>");
+var $url = $(location).attr('href');
+
+$('.clipboard').on('click', function() {
+  $("body").append($temp);
+  $temp.val($url).select();
+  document.execCommand("copy");
+  $temp.remove();
+  $("p").text("URL copied!");
+})
+  </script>
 </body>
 </html>
